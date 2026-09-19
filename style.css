@@ -1,0 +1,392 @@
+:root {
+  --wine-1: #2a0e1c;
+  --wine-2: #4a1030;
+  --ivory: #fdece7;
+  --ivory-soft: rgba(253, 236, 231, 0.75);
+  --gold: #d9a65c;
+  --rose: #e8a0b0;
+
+  --blush-bg: #fbf1ec;
+  --plum-text: #3d1f2b;
+  --plum-soft: #7a5566;
+  --ruby: #c9184a;
+  --paper: #fffdfb;
+  --shadow: rgba(61, 31, 43, 0.18);
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  font-family: 'Poppins', system-ui, sans-serif;
+  background: var(--wine-1);
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- HALAMAN 1 : UCAPAN ---------- */
+
+.hero {
+  position: relative;
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: radial-gradient(120% 100% at 50% 20%, var(--wine-2) 0%, var(--wine-1) 70%);
+  padding: 4rem 1.5rem;
+}
+
+.hearts-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  bottom: -10%;
+  animation-name: floatUp;
+  animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-115vh) translateX(var(--drift, 20px)) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 34rem;
+  text-align: center;
+  color: var(--ivory);
+}
+
+.hero-intro {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: var(--rose);
+  margin: 0 0 0.75rem;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 500;
+  font-size: clamp(1.9rem, 6vw, 2.9rem);
+  line-height: 1.25;
+  margin: 0;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 0.5s;
+}
+
+.hero-name {
+  display: block;
+  font-family: 'Caveat', cursive;
+  font-weight: 700;
+  font-size: clamp(3.2rem, 11vw, 5.5rem);
+  color: var(--gold);
+  line-height: 1;
+  margin-top: 0.3rem;
+  opacity: 0;
+  animation: fadeUp 1.1s ease forwards;
+  animation-delay: 1s;
+}
+
+.hero-divider {
+  width: 2.5rem;
+  height: 2px;
+  background: var(--gold);
+  margin: 1.75rem auto;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 1.5s;
+}
+
+.hero-message {
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  line-height: 1.85;
+  color: var(--ivory-soft);
+  margin: 0;
+  opacity: 0;
+  animation: fadeUp 1s ease forwards;
+  animation-delay: 1.7s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: calc(1.75rem + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  color: var(--ivory-soft);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 2.3s;
+}
+
+.scroll-cue svg {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* ---------- HALAMAN 2 : GALERI FOTO ---------- */
+
+.gallery {
+  position: relative;
+  background: var(--blush-bg);
+  color: var(--plum-text);
+  padding: 5rem 1.5rem 6rem;
+}
+
+.gallery-header {
+  max-width: 32rem;
+  margin: 0 auto 3.5rem;
+  text-align: center;
+}
+
+.gallery-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 600;
+  font-size: clamp(1.7rem, 4.5vw, 2.3rem);
+  margin: 0 0 0.6rem;
+  color: var(--ruby);
+}
+
+.gallery-subtitle {
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  color: var(--plum-soft);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.polaroid-grid {
+  max-width: 68rem;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.75rem 2.25rem;
+}
+
+.polaroid {
+  --rot: 0deg;
+  width: min(78vw, 260px);
+  background: var(--paper);
+  padding: 0.8rem 0.8rem 1.6rem;
+  border-radius: 4px;
+  box-shadow: 0 14px 30px -10px var(--shadow);
+  opacity: 0;
+  transform: translateY(36px) rotate(0deg) scale(0.96);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.polaroid.visible {
+  opacity: 1;
+  transform: translateY(0) rotate(var(--rot)) scale(1);
+}
+
+.polaroid:nth-child(6n + 1) {
+  --rot: -4deg;
+}
+.polaroid:nth-child(6n + 2) {
+  --rot: 3deg;
+  margin-top: 1.5rem;
+}
+.polaroid:nth-child(6n + 3) {
+  --rot: -2deg;
+}
+.polaroid:nth-child(6n + 4) {
+  --rot: 4deg;
+  margin-top: 2rem;
+}
+.polaroid:nth-child(6n + 5) {
+  --rot: -3deg;
+}
+.polaroid:nth-child(6n + 6) {
+  --rot: 2deg;
+  margin-top: 1rem;
+}
+
+.polaroid:hover {
+  transform: translateY(-4px) rotate(0deg) scale(1.02);
+  transition: transform 0.35s ease;
+}
+
+.photo-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 2px;
+  background: linear-gradient(150deg, var(--rose) 0%, #f3c6d1 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #fff;
+  overflow: hidden;
+}
+
+.photo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-placeholder span {
+  font-size: 0.78rem;
+  font-family: 'Poppins', sans-serif;
+  opacity: 0.85;
+}
+
+.polaroid-caption {
+  display: block;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 1.35rem;
+  color: var(--plum-text);
+  margin-top: 0.9rem;
+}
+
+.closing {
+  max-width: 30rem;
+  margin: 5rem auto 0;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
+}
+
+.closing.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.closing-line {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(1.8rem, 4vw, 2.3rem);
+  color: var(--ruby);
+  margin: 0 0 0.5rem;
+}
+
+.closing-sub {
+  font-size: 0.9rem;
+  color: var(--plum-soft);
+  margin: 0;
+}
+
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: none;
+  background: var(--ruby);
+  color: #fff;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 18px -6px rgba(201, 24, 74, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+  z-index: 10;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+  .polaroid:nth-child(n) {
+    margin-top: 0;
+  }
+}
